@@ -57,28 +57,29 @@ export const useLeadStore = create((set) => ({
         }
     },
 
-    deleteLead: async (id) =>{
-        if (!id) return;
-        set({isLeadsLoading: true});
-        try {
-            // Call backend API
-            const res = await axiosInstance.delete(`/lead/leads/${id}`);
-            if(res.data.success){
-                set((state) => ({
-                    leads: state.leads.filter((lead) => lead._id !== id),
-                })),
-                toast.success(res.data.message);
-            }else{
-                toast.warn(res.data.message);
-            }
-            return res.data;
-        } catch (error) {
-            toast.error("Error deleting lead.")
-            return {success: false, message:error.response.data.message}
-        } finally{
-            set({isLeadsLoading: false});
+    deleteLead: async (id) => {
+    set({ isLeadsLoading: true });
+    try {
+        const res = await axiosInstance.delete(`/lead/leads/${id}`);
+        if (res.data.success) {
+            set((state) => ({
+                leads: state.leads.filter((lead) => lead._id !== id),
+            }));
+            toast.success(res.data.message);
+        } else {
+            toast.warn(res.data.message);
         }
-    },
+        return res.data;
+    } catch (error) {
+        toast.error("Error deleting lead.");
+        return { 
+            success: false, 
+            message: error.response?.data?.message || "Something went wrong" 
+        };
+    } finally {
+        set({ isLeadsLoading: false });
+    }
+},
 
     updateLead: async (id, data) =>{
         set({isLeadsLoading: true});
