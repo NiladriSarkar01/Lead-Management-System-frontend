@@ -11,9 +11,9 @@ const DetailsPanel = ({ onEditClick}) => {
   const onDeleteClick = ()=>{
     setShowDialog(true);
   }
-  const Delete = () =>{
-        deleteLead(selectedLead._id);
-        setSelectedLead(null);
+  const Delete = async () =>{
+        const res = await deleteLead(selectedLead._id);
+        if(res.success ) setSelectedLead(null);
         setShowDialog(false)
   }
 
