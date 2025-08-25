@@ -142,7 +142,7 @@ export default function UpdateForm() {
               disabled={isLeadsLoading}
               className="bg-indigo-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
             >
-              {isLeadsLoading ? "Submitting..." : "Create Lead"}
+              {isLeadsLoading ? "Submitting..." : "Update Lead"}
             </button>
           </div>
         </form>
