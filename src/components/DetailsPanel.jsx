@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useLeadStore } from '../store/useLeadStore';
 import ConfirmDialog from './ConfirmDialog';
 
@@ -6,17 +6,12 @@ const DetailsPanel = ({ onEditClick}) => {
 
     const {deleteLead, setSelectedLead, selectedLead } = useLeadStore();
     
-  const [showDialog, setShowDialog] = useState(false);
 
-  const onDeleteClick = ()=>{
-    setShowDialog(true);
-  }
-  const Delete = async () =>{
+  const onDeleteClick = async ()=>{
     if(selectedLead){
       const res = await deleteLead(selectedLead._id);
       if(res.success) setSelectedLead(null);
     }
-     setShowDialog(false)  
   }
 
   return (
@@ -59,15 +54,6 @@ const DetailsPanel = ({ onEditClick}) => {
             </button>
           </div>
           ):(null)}
-
-            {showDialog && (
-                <ConfirmDialog
-                message="Are you sure?"
-                onConfirm={(value) => {
-                value ? Delete():setShowDialog(false)
-            }}
-        />
-      )}
 
         </div>
   )

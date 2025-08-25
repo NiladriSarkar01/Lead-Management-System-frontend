@@ -62,9 +62,9 @@ export const useLeadStore = create((set) => ({
     try {
         const res = await axiosInstance.delete(`/lead/leads/${id}`);
         if (res.data.success) {
-            // set((state) => ({
-            //     leads: state.leads.filter((lead) => lead._id !== id),
-            // }));
+            set((state) => ({
+                leads: state.leads.filter((lead) => lead._id !== id),
+            }));
             toast.success(res.data.message);
         } else {
             toast.warn(res.data.message);
