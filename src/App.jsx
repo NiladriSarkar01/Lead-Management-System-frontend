@@ -17,8 +17,6 @@ const App = () => {
 
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const {selectedLead} = useLeadStore();
-
-  console.log(selectedLead);
   
 
   useEffect(() => {
@@ -41,7 +39,7 @@ const App = () => {
         <Route path="/signup" element={!authUser ? <SignupPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/create-lead" element={authUser ? <LeadForm pageTittle={"Create New Lead"}/> : <Navigate to="/" />} />
-        <Route path="/update-lead" element={authUser ? selectedLead._id? <UpdateForm  /> : <Navigate to="/" />:<Navigate to={'/login'}/>} />
+        <Route path="/update-lead" element={authUser ? selectedLead?._id? <UpdateForm  /> : <Navigate to="/" />:<Navigate to={'/login'}/>} />
       </Routes>
 
       <ToastContainer />
