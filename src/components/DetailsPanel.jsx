@@ -9,7 +9,7 @@ const DetailsPanel = ({ onEditClick}) => {
 
   const onDeleteClick = async ()=>{
     if(selectedLead){
-      const res = await deleteLead(selectedLead._id);
+      const res = await deleteLead(selectedLead?._id);
       if(res.success) setSelectedLead(null);
     }
   }
